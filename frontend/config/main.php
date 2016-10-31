@@ -34,14 +34,13 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-    
-      'urlManager' => [
-      'enablePrettyUrl' => true,
-      'showScriptName' => false,
-      'rules' => [
-      ],
-      ],
-     
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                'noticia/<slug>' => 'site/noticia',
+            ],
+        ],
     ],
     'modules' => [
         'user' => [
@@ -52,7 +51,6 @@ return [
             'cost' => 12,
             'admins' => ['admin']
         ],
-        
     ],
     'params' => $params,
 ];

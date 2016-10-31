@@ -49,7 +49,7 @@ return [
             'disabledCommands' => ['netmount'], //отключение ненужных команд https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#commands
             'roots' => [
                 [
-                    'baseUrl' => '/intranet/frontend/web',
+                    'baseUrl' => '/caicedocms/frontend/web',
                     'basePath' => '@frontend/web',
                     'path' => 'uploads/global',
                     'name' => 'Global'
@@ -68,5 +68,6 @@ return [
         ],
         'rbac' => 'dektrium\rbac\RbacWebModule'
     ],
+
     'params' => $params,
 ];

@@ -18,6 +18,8 @@ use frontend\models\ContactForm;
  */
 class SiteController extends Controller
 {
+    
+    public $layout = 'main';
     /**
      * @inheritdoc
      */
@@ -230,4 +232,47 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+    
+
+        public function actionNoticia($slug)
+            {
+            $this->layout='main2';
+                $categorias = \common\models\Categoria::find()->all();
+
+                $noticia = \common\models\Noticia::find("seo_slug = :slug", [":slug" => $slug])->one();
+
+                //$comentario = new Comentario(["scenario" => "comentario"]);
+
+//                if ($comentario->load(Yii::$app->request->post())) {
+//
+//                    $comentario->estado         = '0';
+//                    $comentario->noticia_id     = $noticia->id;
+//                    $comentario->fecha          = new Expression("NOW()");
+//                    $comentario->correo         = Security::mcrypt($comentario->correo);
+//
+//                    if ($comentario->save()) {
+//                        Yii::$app->session->setFlash('success', 'Gracias por su comentario');
+//                    } else {
+//                        Yii::$app->session->setFlash('error', 'Su comentario no pudo ser registrado');
+//                    }
+//
+//                    return $this->redirect(["/noticia/$slug"]);
+//                }
+
+                return $this->render(
+                    'noticia',
+                    [
+                        //'comentario'     => $comentario,
+                        'categorias'    => $categorias,
+                        'noticia'       => $noticia,
+                    ]
+                );
+            }
+
+    
+    
+    
+    
+    
+    
 }
