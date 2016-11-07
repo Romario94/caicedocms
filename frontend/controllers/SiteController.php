@@ -237,10 +237,12 @@ class SiteController extends Controller
         public function actionNoticia($slug)
             {
             $this->layout='main2';
+            
                 $categorias = \common\models\Categoria::find()->all();
 
-                $noticia = \common\models\Noticia::find("seo_slug = :slug", [":slug" => $slug])->one();
-
+                
+                $noticia = \common\models\Noticia::getAllLeft($slug) ; // \common\models\Noticia::find("seo_slug = :slug", [":slug" => $slug])->one();
+                //print_r($noticia);die; 
                 //$comentario = new Comentario(["scenario" => "comentario"]);
 
 //                if ($comentario->load(Yii::$app->request->post())) {

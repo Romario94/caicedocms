@@ -26,30 +26,35 @@ class CategoriaController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-//             'access' => [
-//                'class' => \yii\filters\AccessControl::className(),
-//                'rules' => [
-//                    [
-//                        'actions' => ['login', 'error'],
-//                        'allow' => true,
-//                    ],
-//                    [
-//                        'actions' => ['logout', 'Noticia', 'Categoria', 'Comentarios', 'create', 'update', 'view', 'delete'],
-//                        'allow' => true,
-//                        'roles' => ['admin'],
-//                    ],
-//                    [
-//                        'actions' => ['logout', 'Noticia'],
-//                        'allow' => true,
-//                        'roles' => ['user'],
-//                    ],
-//                    [
-//                        'actions' => ['logout', 'index'],
-//                        'allow' => true,
-//                        'roles' => ['@'],
-//                    ],
-//                ],
-//            ],
+             'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['login', 'error'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => ['logout', 'index', 'create', 'update', 'view', 'delete'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                     [
+                        'actions' => ['logout', 'index', 'create', 'update', 'view', 'delete'],
+                        'allow' => true,
+                        'roles' => ['marc'],
+                    ],
+                    [
+                        'actions' => ['logout', 'Noticia'],
+                        'allow' => true,
+                        'roles' => ['user'],
+                    ],
+                    [
+                        'actions' => ['logout', 'index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
         ];
     }
 

@@ -1,7 +1,7 @@
 <header id="header_outer">
     <div class="container">
         <div class="header_section">
-            <div class="logo"><a href="javascript:void(0)"><img src="img/ntp.jpg" height="80px" width="250px" alt="ntp"></a></div>
+            <div class="logo"><a href="javascript:void(0)"><img src="<?= Yii::getAlias('@web/img/ntp.jpg') ?>" height="80px" width="250px" alt="ntp"></a></div>
             <nav class="nav" id="nav">
                 
                 <ul class="">

@@ -24,7 +24,7 @@
             <ul class="clearfix"> 
 
                 <li><a id="all" href="#" data-filter="*" class="active">
-                        <h5>All</h5>
+                        <h5>Todos</h5>
                     </a></li>
 
                 <?php
@@ -57,29 +57,23 @@
           
                 if ($value_noticia->categoria_id ==  $val  ):
                     ?>
-            
-                 <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(674px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;" class="portfolio-item one-four  <?= $value_noticia->categoria_id ?>  isotope-item">
-                        <div class="portfolio-image"><img src="http://www.innovacionescyc.net/PW8/wp-content/uploads/2015/06/image_gallery.png" alt="Portfolio 1"></div>
-                        
-                        
-                        <div class="project-overlay">
-                            <div class="open-project-link"> <a class="open-project"  title="Open Project"></a></div>
 
-                            <div class="project-info">
-                                <div class="zoom-icon"></div>
-                                <h4 class="project-name"><?= $value_noticia->titulo ?></h4>
-                                <p class="project-categories"><?= $value_noticia->seo_slug ?></p>
+            <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;" class="portfolio-item one-four   <?= $value_noticia->categoria_id ?> isotope-item">
+                        <div class="portfolio-image"> <img src="<?= Yii::getAlias('@web/img/carpeta.png') ?>"  alt="Portfolio 1"> </div>
+                        <a title="Starbucks Coffee" rel="prettyPhoto[galname]" href="<?= \yii\helpers\Url::to(['noticia/' . $value_noticia->seo_slug])?>">
+                            <div class="project-overlay">
+                                <div class="project-info">
+                                    <div class="zoom-icon"></div>
+                                    <h4 class="project-name"><?= $value_noticia->titulo ?></h4>
+                                    <p class="project-categories"><?= $value_noticia->seo_slug ?></p>
+                                </div>
                             </div>
+                        </a> </div>          
 
-                        </div>
-                       
-                    </div>
-             <a href="<?= \yii\helpers\Url::to(['noticia/' . $value_noticia->seo_slug])?>">Ver Post</a>
-             
              
                 <?php elseif($value_noticia->categoria_id=='*'): ?>                
                     <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(674px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;" class="portfolio-item one-four  <?= $value_noticia->categoria_id ?>  isotope-item">
-                        <div class="portfolio-image"> <img src="http://definicion.de/wp-content/uploads/2010/04/vacio.jpg" alt="Portfolio 1"> </div>
+                        <div class="portfolio-image"> <img src="<?= Yii::getAlias('@web/img/vacio.jpg') ?>" alt="Portfolio 1"> </div>
                         <div class="project-overlay">
                             <div class="open-project-link"> <a class="open-project" href="" title="Open Project"></a> </div>
 

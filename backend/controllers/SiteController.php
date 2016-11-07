@@ -31,6 +31,11 @@ class SiteController extends Controller
                         'roles' => ['admin'],
                     ],
                      [
+                        'actions' => ['logout', 'Noticia','Categoria','Comentarios', 'create', 'update', 'view', 'delete'],
+                        'allow' => true,
+                        'roles' => ['marc'],
+                    ],
+                     [
                         'actions' => ['logout', 'Noticia'],
                         'allow' => true,
                         'roles' => ['user'],

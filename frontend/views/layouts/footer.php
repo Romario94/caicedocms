@@ -49,6 +49,6 @@
     </section>
   </div>
   <div class="container">
-    <div class="footer_bottom"> <span>Copyright © 2014 Butterfly Theme By <a href="http://w3goods.com">W3Goods</a>. </span> </div>
+    <div class="footer_bottom"> <span>Alexander Caicedo</span> </div>
   </div>
-</footer>> <span>Copyright © 2014 Butterfly Theme By <a href="http://w3goods.com">W3Goods</a>. </span> </div>
+</footer> 

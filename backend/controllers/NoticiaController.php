@@ -33,9 +33,14 @@ class NoticiaController extends Controller {
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'Noticia', 'Categoria', 'Comentarios', 'create', 'update', 'view', 'delete'],
+                        'actions' => ['logout', 'index', 'create', 'update', 'view', 'delete'],
                         'allow' => true,
                         'roles' => ['admin'],
+                    ],
+                    [
+                        'actions' => ['logout', 'index', 'create', 'update', 'view', 'delete'],
+                        'allow' => true,
+                        'roles' => ['marc'],
                     ],
                     [
                         'actions' => ['logout', 'Noticia'],
@@ -100,15 +105,31 @@ class NoticiaController extends Controller {
      * @param integer $id
      * @return mixed
      */
+//    public function actionUpdate($id) {
+//        $model = $this->findModel($id);
+//
+//        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+//            return $this->redirect(['view', 'id' => $model->id]);
+//        } else {
+//            return $this->render('update', [
+//                        'model' => $model,
+//            ]);
+//        }
+//    }
     public function actionUpdate($id) {
-        $model = $this->findModel($id);
+        $Noticia = Noticia::findOne(['created_by' => Yii::$app->user->identity]);
+        if (isset($Noticia) || Yii::$app->user->can('admin')) {
+            $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('update', [
+                            'model' => $model,
+                ]);
+            }
         } else {
-            return $this->render('update', [
-                        'model' => $model,
-            ]);
+            throw new \yii\web\HttpException(403, 'El contenido no es suyo.');
         }
     }
 
@@ -118,10 +139,22 @@ class NoticiaController extends Controller {
      * @param integer $id
      * @return mixed
      */
+//    public function actionDelete($id) {
+//        $this->findModel($id)->delete();
+//
+//        return $this->redirect(['index']);
+//    }
     public function actionDelete($id) {
-        $this->findModel($id)->delete();
+        //BORRAR NOTICIA SOLO SI ERES EL CREADOR DE LA NOTICIA O ADMIN
+        $Noticia = Noticia::findOne(['created_by' => Yii::$app->user->identity]);
+        if (isset($Noticia) || Yii::$app->user->can('admin')) {
+            $this->findModel($id)->delete();
+            return $this->redirect(['index']);
+        } else {
+            throw new \yii\web\HttpException(403, 'El contenido no es suyo.');
 
-        return $this->redirect(['index']);
+            die;
+        }
     }
 
     /**
