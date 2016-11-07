@@ -49,8 +49,8 @@ return [
             'disabledCommands' => ['netmount'], //отключение ненужных команд https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#commands
             'roots' => [
                 [
-                    'baseUrl' => '/caicedocms/frontend/web',
-                    'basePath' => '@frontend/web',
+                    'baseUrl' => '/caicedocms/backend/web',
+                    'basePath' => '@backend/web',
                     'path' => 'uploads/global',
                     'name' => 'Global'
                 ],
