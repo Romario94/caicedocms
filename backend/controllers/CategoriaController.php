@@ -44,7 +44,7 @@ class CategoriaController extends Controller
                         'roles' => ['marc'],
                     ],
                     [
-                        'actions' => ['logout', 'Noticia'],
+                        'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['user'],
                     ],
@@ -111,14 +111,19 @@ class CategoriaController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+         $Categoria = Categoria::findOne(['created_by' => Yii::$app->user->identity]);
+        if (isset($Categoria) || Yii::$app->user->can('admin')) {
+            $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('update', [
+                            'model' => $model,
+                ]);
+            }
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            throw new \yii\web\HttpException(403, 'El contenido no es suyo.');
         }
     }
 
@@ -130,9 +135,15 @@ class CategoriaController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $Categoria= Categoria::findOne(['created_by' => Yii::$app->user->identity]);
+        if (isset($Categoria) || Yii::$app->user->can('admin')) {
+            $this->findModel($id)->delete();
+            return $this->redirect(['index']);
+        } else {
+            throw new \yii\web\HttpException(403, 'El contenido no es suyo.');
 
-        return $this->redirect(['index']);
+            die;
+        }
     }
 
     /**

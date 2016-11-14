@@ -18,10 +18,10 @@ return [
 //            'enableAutoLogin' => true,
 //            'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
 //        ],
-        'session' => [
-            // this is the name of the session cookie used for login on the frontend
-            'name' => 'advanced-frontend',
-        ],
+//        'session' => [
+//            // this is the name of the session cookie used for login on the frontend
+//            'name' => 'advanced-frontend',
+//        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -40,6 +40,18 @@ return [
             'rules' => [
                 'noticia/<slug>' => 'site/noticia',
             ],
+        ],
+        'urlManagerFrontEnd' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => '/caicedocms/frontend/web',
+        'enablePrettyUrl' => true,
+        'showScriptName' => false,
+        ],
+        'urlManagerBackEnd' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => '/caicedocms/backend/web',
+        'enablePrettyUrl' => true,
+        'showScriptName' => false,
         ],
     ],
     'modules' => [

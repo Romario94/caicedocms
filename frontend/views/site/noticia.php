@@ -1,33 +1,36 @@
-<link href="../../../vendor/bower/plantilla/css/letras.css" rel="stylesheet" type="text/css"/>
+
+
 <br><br><br><br>
-<body style="background-color: #219"> 
-<div class="container">
-    <div class="row">
-        <div class="container-fluid text-left">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-               
-                <h1>   Titulo:   <?=
+
+        <!--Top_content-->
+<section id="top_content" class="top_cont_outer">
+  <div class="top_cont_inner">
+    <div class="container">
+      <div class="top_content">
+        <div class="row">
+          <div class="col-lg-5 col-sm-7">
+            <div class="top_left_cont flipInY wow animated">
+              <h3>Titulo:   <?=
                 yii\helpers\ArrayHelper::getValue($noticia, function ($noticia, $defaultValue) {
                     return $noticia[0]['tituloNoticia'];
                 });
-                ?></h1><br>
-
-                <h1>Categoría: <?=
+                ?></h3>
+              <h2>Categoría: <?=
                 yii\helpers\ArrayHelper::getValue(common\models\Categoria::findOne(['id' => yii\helpers\ArrayHelper::getValue($noticia, function ($noticia, $defaultValue) {
                                         return $noticia[0]['categoriaNoticia'];
                                     })]), 'categoria');
-                ?></h1><br>
-
-                <h4>    
-                <?=
+                ?></h2>
+              <p> <?=
                 yii\helpers\ArrayHelper::getValue($noticia, function ($noticia, $defaultValue) {
                     return $noticia[0]['detalleNoticia'];
                 });
-                ?></h4>
-
-
-            </div>
-        </div>  
+                ?> </p>
+              
+          </div>
+          <div class="col-lg-7 col-sm-5"> </div>
+        </div>
+      </div>
     </div>
-</div>
-</body>
+  </div>
+</section>
+<!--Top_content--> 

@@ -14,11 +14,8 @@ $this->title = 'Alexander Caicedo';
         <div class="row">
           <div class="col-lg-5 col-sm-7">
             <div class="top_left_cont flipInY wow animated">
-              <h3>Nuevas Técnicas de Programación</h3>
-              <h2>creating websites that
-                make you stop &amp; stare</h2>
-              <p> Accusantium quam, aliquam ultricies eget tempor id, aliquam eget nibh et. Maecen aliquam, risus at semper. Proin iaculis purus consequat sem cure digni ssim. Donec porttitora entum. </p>
-              
+              <h2>Nuevas Técnicas de Programación</h2>
+             
           </div>
           <div class="col-lg-7 col-sm-5"> </div>
         </div>

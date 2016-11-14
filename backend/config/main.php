@@ -9,7 +9,6 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-   
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -19,10 +18,10 @@ return [
 //            'enableAutoLogin' => true,
 //            'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
 //        ],
-        'session' => [
-            // this is the name of the session cookie used for login on the backend
-            'name' => 'advanced-backend',
-        ],
+//        'session' => [
+//            // this is the name of the session cookie used for login on the backend
+//            'name' => 'advanced-backend',
+//        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -39,6 +38,25 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+            ],
+        ],
+        'urlManagerBackEnd' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => '/caicedocms/backend/web',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
+        'urlManagerFrontEnd' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => '/caicedocms/frontend/web',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@app/views' => '@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app'
+                ],
             ],
         ],
     ],
@@ -68,6 +86,5 @@ return [
         ],
         'rbac' => 'dektrium\rbac\RbacWebModule'
     ],
-
     'params' => $params,
 ];

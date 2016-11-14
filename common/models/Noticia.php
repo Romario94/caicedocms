@@ -45,7 +45,7 @@ class Noticia extends \yii\db\ActiveRecord {
             [['categoria_id', 'created_by', 'updated_by'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['titulo', 'seo_slug'], 'string', 'max' => 100],
-            [['detalle'], 'string', 'max' => 300],
+            //[['detalle'], 'string', 'max' => 300],
             [['categoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categoria::className(), 'targetAttribute' => ['categoria_id' => 'id']],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updated_by' => 'id']],

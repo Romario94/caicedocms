@@ -52,7 +52,15 @@ AppAsset::register($this);
                 ['class' => 'btn btn-link logout']
             )
             . Html::endForm()
-            . '</li>';
+            . '</li>'
+            .'<li>'
+            . Html::beginForm(['../../..'.yii::$app->urlManagerFrontEnd->baseUrl ], 'post')
+            . Html::submitButton(
+                'Principal',
+                ['class' => 'btn btn-link principal']
+            )
+            . Html::endForm()
+            . '</li>'    ;
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],

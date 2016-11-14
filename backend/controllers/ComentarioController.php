@@ -43,7 +43,7 @@ class ComentarioController extends Controller {
                         'roles' => ['marc'],
                     ],
                     [
-                        'actions' => ['logout', 'Noticia'],
+                        'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['user'],
                     ],
