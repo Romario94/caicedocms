@@ -53,13 +53,14 @@
                 <?php
                 
                 $val= yii\helpers\ArrayHelper::getValue(\common\models\Categoria::findOne(['id'=>$value_noticia->categoria_id]),'id');
-               
+                $imagenCategoria=yii\helpers\ArrayHelper::getValue(\common\models\Categoria::findOne(['id'=>$value_noticia->categoria_id]),'imagen');
           
                 if ($value_noticia->categoria_id ==  $val  ):
                     ?>
+            
 
             <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;" class="portfolio-item one-four   <?= $value_noticia->categoria_id ?> isotope-item">
-                        <div class="portfolio-image"> <img src="<?= Yii::getAlias('@web/img/carpeta.png') ?>"  alt="Portfolio 1"> </div>
+                        <div class="portfolio-image"> <img src="<?= yii::$app->urlManagerBackEnd->baseUrl.'/uploads/'.$imagenCategoria?>"  alt="Portfolio 1"> </div>
                         <a title="Starbucks Coffee" rel="prettyPhoto[galname]" href="<?= \yii\helpers\Url::to(['noticia/' . $value_noticia->seo_slug])?>">
                             <div class="project-overlay">
                                 <div class="project-info">

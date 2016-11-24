@@ -90,12 +90,29 @@ class CategoriaController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+   public function actionCreate()
     {
         $model = new Categoria();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) ) {
+            $imagen = $model->uploadImage();
+           // print_r($documento);die;
+            if ($model->save()) {
+                // upload only if valid uploaded file instance found
+                if ($imagen !== false) {
+                    $path = $model->getImageFile();
+
+                    $imagen->saveAs($path);
+                }
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                Yii::$app->session->setFlash('error', 'No se pudo guardar');
+                // ERROR --->
+                return $this->render('create', [
+                            'model' => $model,
+                ]);
+            }
+
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -103,29 +120,87 @@ class CategoriaController extends Controller
         }
     }
 
+
     /**
      * Updates an existing Categoria model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+  public function actionUpdate($id)
     {
-         $Categoria = Categoria::findOne(['created_by' => Yii::$app->user->identity]);
-        if (isset($Categoria) || Yii::$app->user->can('admin')) {
-            $model = $this->findModel($id);
+        $model = $this->findModel($id);
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+        $oldFile = $model->getImageFile();
+
+        $oldImage = $model->imagen;
+        //$oldFileName = $model->nombre;
+
+
+        if (!isset($oldFile) && !isset($oldImage)){
+        if ($model->load(Yii::$app->request->post()) ) {
+
+            $image = $model->uploadImage();
+
+            // revert back if no valid file instance uploaded
+            if ($image === false) {
+                $model->imagen = $oldImage;
+                //$model->filename = $oldFileName;
+            }
+            if ($model->save()) {
+                // upload only if valid uploaded file instance found
+                if ($image !== false && unlink($oldFile)) { // delete old and overwrite
+                    $path = $model->getImageFile();
+                    $image->saveAs($path);
+                }
                 return $this->redirect(['view', 'id' => $model->id]);
             } else {
+                // error in saving model
                 return $this->render('update', [
                             'model' => $model,
                 ]);
             }
+
+
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            throw new \yii\web\HttpException(403, 'El contenido no es suyo.');
+            return $this->render('update', [
+                'model' => $model,
+            ]);
         }
+        } else {
+
+
+        if ($model->load(Yii::$app->request->post()) ) {
+
+            $imagen = $model->uploadImage();
+           // print_r($documento);die;
+            if ($model->save()) {
+                // upload only if valid uploaded file instance found
+                if ($imagen !== false) {
+                    $path = $model->getImageFile();
+
+                    $imagen->saveAs($path);
+                }
+               return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                // ERROR --->
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+            }
+
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+
+        }
+
     }
+
 
     /**
      * Deletes an existing Categoria model.
