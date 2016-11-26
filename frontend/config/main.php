@@ -36,22 +36,25 @@ return [
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
+           
             'showScriptName' => false,
+                      
             'rules' => [
                 'noticia/<slug>' => 'site/noticia',
+                'class' => 'yii\rest\UrlRule', 'controller' => 'user',
             ],
         ],
         'urlManagerFrontEnd' => [
             'class' => 'yii\web\urlManager',
             'baseUrl' => '/caicedocms/frontend/web',
-        'enablePrettyUrl' => true,
-        'showScriptName' => false,
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
         ],
         'urlManagerBackEnd' => [
             'class' => 'yii\web\urlManager',
             'baseUrl' => '/caicedocms/backend/web',
-        'enablePrettyUrl' => true,
-        'showScriptName' => false,
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
         ],
     ],
     'modules' => [
