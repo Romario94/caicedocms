@@ -14,7 +14,7 @@
     <!-- Container -->
 
     <div class="portfolio-top"></div>
-
+    <?php \yii\widgets\Pjax::begin(); ?>
     <!-- Portfolio Plus Filters -->
     <div class="portfolio"> 
 
@@ -48,20 +48,21 @@
         <div class="isotope" style="position: relative; overflow: hidden; height: 480px;" id="portfolio-wrap"> 
             <?php
             $noticia = common\models\Noticia::find()->all();
+            $aux = \common\models\Noticia::find();
+           
             foreach ($noticia as $key => $value_noticia):
                 ?>   
                 <?php
                 
                 $val= yii\helpers\ArrayHelper::getValue(\common\models\Categoria::findOne(['id'=>$value_noticia->categoria_id]),'id');
-           
-          
+                
                 if ($value_noticia->categoria_id ==  $val  ):
                     ?>
             
 
             <div style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1); width: 337px; opacity: 1;" class="portfolio-item one-four   <?= $value_noticia->categoria_id ?> isotope-item">
                         <div class="portfolio-image"> <img src="<?= yii::$app->urlManagerBackEnd->baseUrl.'/uploads/'.$value_noticia->imagen?>"  alt="Portfolio 1"> </div>
-                        <a title="Starbucks Coffee" rel="prettyPhoto[galname]" href="<?= \yii\helpers\Url::to(['noticia/' . $value_noticia->seo_slug])?>">
+                        <a title="<?= $value_noticia->titulo ?>" rel="prettyPhoto[galname]" href="<?= \yii\helpers\Url::to(['noticia/' . $value_noticia->seo_slug])?>">
                             <div class="project-overlay">
                                 <div class="project-info">
                                     <div class="zoom-icon"></div>
@@ -96,10 +97,10 @@
         </div>
 
         <!--/Portfolio Wrap --> 
-
-    </div>
+    
     <!--/Portfolio Plus Filters -->
 
+    
     <div class="portfolio-bottom"></div>
 
     <!-- Project Page Holder-->

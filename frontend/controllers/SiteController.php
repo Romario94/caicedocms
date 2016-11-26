@@ -74,25 +74,15 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $aux = \common\models\Noticia::find();
-        
-        $pagination = new \yii\data\Pagination([
-            'defaultPageSize' => 2,
-            'totalCount' => $aux->count(),
-        ]);
-        
-        $noticia = $aux->orderBy('id desc')
-                ->offset($pagination->offset)
-                ->limit($pagination->limit)
-                ->all();
+
         
         $categoria = \common\models\Categoria::find()->all();
         
         return $this->render('index',
                 [
                     'categoria' => $categoria,
-                    'pagination' =>$pagination,
-                    'noticia' => $noticia,
+                    //'pagination' =>$pagination,
+                    //'noticia' => $noticia,
                 ]
                 );
     }
