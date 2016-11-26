@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'categoria',
             'seo_slug',
-            'imagen',
+            //'imagen',
             'created_by',
             // 'created_at',
             // 'updated_by',

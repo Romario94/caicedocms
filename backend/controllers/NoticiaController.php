@@ -90,8 +90,24 @@ class NoticiaController extends Controller {
     public function actionCreate() {
         $model = new Noticia();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $imagen = $model->uploadImage();
+            // print_r($documento);die;
+            if ($model->save()) {
+                // upload only if valid uploaded file instance found
+                if ($imagen !== false) {
+                    $path = $model->getImageFile();
+
+                    $imagen->saveAs($path);
+                }
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                Yii::$app->session->setFlash('error', 'No se pudo guardar');
+                // ERROR --->
+                return $this->render('create', [
+                            'model' => $model,
+                ]);
+            }
         } else {
             return $this->render('create', [
                         'model' => $model,
@@ -118,15 +134,73 @@ class NoticiaController extends Controller {
 //    }
     public function actionUpdate($id) {
         $Noticia = Noticia::findOne(['created_by' => Yii::$app->user->identity]);
+
+
+
         if (isset($Noticia) || Yii::$app->user->can('admin')) {
             $model = $this->findModel($id);
+            $oldFile = $model->getImageFile();
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            $oldImage = $model->imagen;
+
+
+            if (!isset($oldFile) && !isset($oldImage)) {
+                if ($model->load(Yii::$app->request->post())) {
+
+                    $image = $model->uploadImage();
+
+                    // revert back if no valid file instance uploaded
+                    if ($image === false) {
+                        $model->imagen = $oldImage;
+                        //$model->filename = $oldFileName;
+                    }
+                    if ($model->save()) {
+                        // upload only if valid uploaded file instance found
+                        if ($image !== false && unlink($oldFile)) { // delete old and overwrite
+                            $path = $model->getImageFile();
+                            $image->saveAs($path);
+                        }
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    } else {
+                        // error in saving model
+                        return $this->render('update', [
+                                    'model' => $model,
+                        ]);
+                    }
+
+
+                    return $this->redirect(['view', 'id' => $model->id]);
+                } else {
+                    return $this->render('update', [
+                                'model' => $model,
+                    ]);
+                }
             } else {
-                return $this->render('update', [
-                            'model' => $model,
-                ]);
+
+
+                if ($model->load(Yii::$app->request->post())) {
+
+                    $imagen = $model->uploadImage();
+                    // print_r($documento);die;
+                    if ($model->save()) {
+                        // upload only if valid uploaded file instance found
+                        if ($imagen !== false) {
+                            $path = $model->getImageFile();
+
+                            $imagen->saveAs($path);
+                        }
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    } else {
+                        // ERROR --->
+                        return $this->render('update', [
+                                    'model' => $model,
+                        ]);
+                    }
+                } else {
+                    return $this->render('update', [
+                                'model' => $model,
+                    ]);
+                }
             }
         } else {
             throw new \yii\web\HttpException(403, 'El contenido no es suyo.');

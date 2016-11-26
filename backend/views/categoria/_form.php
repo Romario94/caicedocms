@@ -14,20 +14,7 @@ use kartik\file\FileInput;
 
     <?= $form->field($model, 'categoria')->textInput(['maxlength' => true]) ?>
 
-      <?=
-    // your fileinput widget for single file upload
-
-    $form->field($model, 'imagen')->widget(FileInput::classname(), [
-        'options' => [
-            'accept' => 'image/*',
-        ],
-        'pluginOptions' => [
-            'allowedFileExtensions' => ['jpg', 'png'],
-            'browseIcon' => '<i class="glyphicon glyphicon-open-file"></i> ',
-            'browseLabel' => $model->verifBrowseLabel(),
-        ],
-    ])
-    ?>
+   
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
